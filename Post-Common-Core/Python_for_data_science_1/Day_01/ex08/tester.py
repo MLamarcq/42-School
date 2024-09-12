@@ -7,8 +7,8 @@ for i in ft_tqdm(range(333)) :
 	time.sleep(0.005)
 print()
 
-for i in tqdm(range(333)) :
-	time.sleep(0.005)
-print()
+# for i in tqdm(range(333)) :
+# 	time.sleep(0.005)
+# print()
 
 

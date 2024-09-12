@@ -8,8 +8,12 @@ class ArgError(Exception) :
 def pars_args(argv) -> bool :
 	if (len(argv) != 2) :
 		return False
-	if not argv[1].isalnum() :
-		return False
+	# if not argv[1].isalnum() or :
+	# 	print("oui")
+	# 	return False
+	for elem in argv[1] :
+		if not elem.isalnum() and not elem.isspace() :
+			return False
 	return True
 
 def print_morse(argv, morse_dict) :
