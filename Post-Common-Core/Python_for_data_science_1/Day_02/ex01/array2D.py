@@ -36,6 +36,7 @@ def slice_arr(family, start, end) :
 	count_col = 0
 	row_slice = 0
 	col_slice = 0
+	tokken = False
 	for elem in family :
 		count_col = len(elem)
 		break
@@ -50,14 +51,11 @@ def slice_arr(family, start, end) :
 		row_slice = start
 	else : 
 		row_slice = slice(start, end)
-	new_arr = family[row_slice][col_slice]
+		tokken = True
+	new_arr = family[row_slice]
+	if tokken :
+		row_slice = end - start
 	return (new_arr, row_slice)
-
-# def change_array_for_np(family: list[int | float]) :
-# 	res = np.array(family)
-# 	print(type(res))
-# 	print(f"res = {res}")
-# 	return res
 
 def take_first_dimensions(family: list) -> tuple:
 	col = 0
@@ -67,11 +65,10 @@ def take_first_dimensions(family: list) -> tuple:
 		break
 	return (row, col)
 
-def print_output(first_dimension: tuple, new_arr: list, row_slice: int) -> str :
+def print_output(first_dimension: tuple, row_slice: int) -> str :
 	output = ''
 	output += f"My shape is: ({first_dimension[0]}, {first_dimension[1]})\n"
 	output += f"My new shape is : ({row_slice}, {first_dimension[1]})\n"
-	output += f"{new_arr}"
 	return output
 
 
@@ -83,4 +80,5 @@ def slice_me(family : list[int | float], start: int, end: int) -> list :
 		raise WrongArg("Array error")
 	first_dimension = take_first_dimensions(family)
 	new_arr, row_slice = slice_arr(family, start, end)
-	return print_output(first_dimension, new_arr, row_slice)
+	print(print_output(first_dimension, row_slice), end='')
+	return new_arr

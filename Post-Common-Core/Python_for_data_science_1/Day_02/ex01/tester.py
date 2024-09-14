@@ -1,4 +1,4 @@
-from array2D import slice_me
+from array2D import slice_me, WrongArg
 
 
 def main() :
