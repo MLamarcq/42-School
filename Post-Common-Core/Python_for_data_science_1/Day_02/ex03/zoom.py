@@ -42,3 +42,6 @@ def main(file) :
 		print("EOF detected. End of program")
 	except KeyboardInterrupt :
 		print("Process interrupted. End of program")
+
+if __name__ == '__main__' : 
+	main('animal.jpeg')
