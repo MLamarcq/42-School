@@ -22,6 +22,7 @@ def handle_shape(img) :
 
 def get_RGB_return_array(img) :
 	data = np.array(img)
+	data = data.astype(np.float32) / 255.0
 	return data
 
 

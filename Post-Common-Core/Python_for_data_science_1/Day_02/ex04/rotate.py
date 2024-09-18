@@ -70,7 +70,7 @@ def main(file) :
 		print(output[:1])
 		zoom_arr = zoom(output)
 		# rotate_arr = np.transpose(zoom_arr)
-		rotate_arr = transpose_arr_right(zoom_arr)
+		rotate_arr = transpose_arr_down(zoom_arr)
 		print(f"rotate_arr = {rotate_arr}")
 		imgplot = plt.imshow(rotate_arr, cmap='gray')
 		plt.show()
