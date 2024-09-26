@@ -2,11 +2,14 @@ import sys
 
 
 class ArgError(Exception):
+    '''ArgError class for error handling'''
     def __str__(self):
         return "AssertionError: the arguments are bad"
 
 
 def pars_args(argv) -> bool:
+    '''Pars the args gives as argv. Check their size and their type. If
+they are not letters, digits or spaces, the function returns false'''
     if (len(argv) != 2):
         return False
     for elem in argv[1]:
@@ -16,6 +19,9 @@ def pars_args(argv) -> bool:
 
 
 def print_morse(argv, morse_dict):
+    '''Take the args passed throught argv and is args are valid, put to upper
+case the letters and print the morse message by comparing caracter and key from
+the morse_dict passed in args'''
     if not pars_args(argv):
         raise ArgError
     to_analyse = ''
@@ -32,6 +38,8 @@ def print_morse(argv, morse_dict):
 
 
 def main():
+    '''Main function. Handle errors, lauch the program by using all
+functions'''
     argv = sys.argv
     morse_dict = {
         " ": "/",
@@ -76,6 +84,8 @@ def main():
         print_morse(argv, morse_dict)
     except ArgError as e:
         print(str(e))
+    except KeyboardInterrupt:
+        print("Signal: SIGINT. End of program")
 
 
 if __name__ == '__main__':
