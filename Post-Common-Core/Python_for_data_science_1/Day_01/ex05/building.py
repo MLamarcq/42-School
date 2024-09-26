@@ -65,11 +65,6 @@ def print_count_char(count_char):
 def main():
     '''Main function. Handle errors, lauch the program by using all
 functions'''
-    print(pars_arg.__doc__)
-    print(prompt_condition.__doc__)
-    print(count_characters_in_arg.__doc__)
-    print(print_count_char.__doc__)
-    print(main.__doc__)
     argv = sys.argv
     count_char = {
         'upper_letter': 0,
