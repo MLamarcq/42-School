@@ -1,6 +1,7 @@
 import time
 import datetime
 
+
 def format_time():
 	current_time = time.time()
 	scientific_notation = "{:.2e}".format(current_time)
