@@ -1,0 +1,22 @@
+<main id="app">
+	{% block content %}
+	{% load static %}
+	{% block css %}<link href="{% static 'pong/css/homepage.css' %}" rel="stylesheet">{% endblock css %}
+	
+	
+
+	<div class="big_div">
+		<div >
+			<h1 class="animated_text text-center" id="animatedText"> Pong</h1>
+			<img src="{% static 'pong/image/gif_pong.gif' %}" width="450" height="300" style="box-shadow: 10px 10px 5px rgba(0,0,0,0.5);">
+		</div>
+	
+
+		<div>
+			<h1 class="animated_text text-center" id="animatedText"> Tic Tac Toe </h1>
+			<img src="{% static 'pong/image/gif_tic_tac_toe.gif' %}" width="450" height="300" style="box-shadow: 10px 10px 5px rgba(0,0,0,0.5);">
+		</div>
+	</div>
+
+	{% endblock %}
+</main>
