@@ -1,3 +1,8 @@
 from load_image import ImgError, ft_load
 
-print(ft_load('landscape.jpg'))
+def main():
+    print(ft_load('animal.jpeg'))
+
+
+if __name__ == '__main__':
+    main()

@@ -1,13 +1,10 @@
-import numpy as np
-
-
 class WrongArg(Exception):
     '''Class WrongArg for error handling'''
     pass
 
 
 def pars_array(family: list) -> int:
-    '''Parse the array given. Check if there is a 2D array, then if all 
+    '''Parse the array given. Check if there is a 2D array, then if all
 content is int or float and then if all the content have all the same size.
 Returns an error if any of these condition is fullfilled'''
     count_size = []
@@ -26,14 +23,8 @@ Returns an error if any of these condition is fullfilled'''
 
 def slice_arr(family, start, end):
     '''Apply the slice method on the array with the start and end given'''
-    count_col = 0
     row_slice = 0
-    col_slice = 0
     tokken = False
-    for elem in family:
-        count_col = len(elem)
-        break
-    col_slice = slice(0, count_col)
     if start < 0:
         row_slice = slice(0, end)
     elif end < 0:
@@ -42,7 +33,7 @@ def slice_arr(family, start, end):
         return []
     elif start == end:
         row_slice = start
-    else: 
+    else:
         row_slice = slice(start, end)
         tokken = True
     new_arr = family[row_slice]
@@ -71,8 +62,10 @@ def print_output(first_dimension: tuple, row_slice: int) -> str:
 
 def slice_me(family: list[int | float], start: int, end: int) -> list:
     '''Error handling, slice the array and print the shape'''
-    if not isinstance(family, list) or not isinstance(start, int) or not isinstance(end, int):
-        raise WrongArg("Your argument type are not as expected: we need 'list', 'int' and 'int")
+    if (not isinstance(family, list)
+            or not isinstance(start, int)
+            or not isinstance(end, int)):
+        raise WrongArg("Your argument type are not as expected: 'list', 'int'")
     check_arr = pars_array(family)
     if not check_arr:
         raise WrongArg("Array error")
