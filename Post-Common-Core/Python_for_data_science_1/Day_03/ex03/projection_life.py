@@ -14,7 +14,9 @@ def get_daframe(file) :
 	return dataframe
 
 def convert_string_to_float(element):
+	# print(type(element), element)
 	if isinstance(element, str) :
+		# print(f"element = {element}")
 		if 'M' in element : 
 			return float(element.replace('M', '').replace(',', '')) * 1e6
 		elif 'B' in element :
@@ -22,6 +24,8 @@ def convert_string_to_float(element):
 		elif 'k' in element :
 			return float(element.replace('k', '').replace(',', '')) * 1e3
 		return float(element.replace(',', ''))
+	elif isinstance(element, int):
+		return (element)
 	return np.nan
 
 def get_specific_date(dataframe, date, code) :
@@ -34,6 +38,7 @@ def get_specific_date(dataframe, date, code) :
 			specific_date = specific_date.astype(np.uint8)
 		case 'income' :
 			specific_date = dataframe.loc[:, date]
+			# print(f"specific date in income = {specific_date.size}")
 			if not isinstance(specific_date, pd.Series) :
 				raise DataFrameError
 			specific_date = specific_date.apply(convert_string_to_float)
@@ -41,15 +46,19 @@ def get_specific_date(dataframe, date, code) :
 	return specific_date
 
 
-# def define_axes(dataframe_1, dataframe_2) :
+def define_axes(life_expectancy, income) :
+	print(f"life = {life_expectancy}")
+	print(f"income = {income}")
 
 
 def main() :
 	try: 
 		dataframe_1 = get_daframe('life_expectancy_years.csv')
 		dataframe_2 = get_daframe('income_per_person_gdppercapita_ppp_inflation_adjusted.csv')
+		# print(dataframe_2.head())
 		life_expectancy = get_specific_date(dataframe_1, '1900', 'life')
 		income = get_specific_date(dataframe_2, '1900', 'income')
+		define_axes(life_expectancy, income)
 	except DataFrameError as e :
 		print(str(e))
 	except KeyError as e:

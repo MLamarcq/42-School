@@ -1,31 +1,41 @@
 import numpy as np
 
 
+class ArrayError(Exception):
+    '''Class ArrayError for error handling'''
+    pass
+
+
 class WrongArg(Exception):
     '''Class WrongArg for error handling'''
     pass
 
 
-def check_list(height, weight) -> int:
-    ''''Check if the lists given are valid or not'''
-    if not isinstance(height, list) or not isinstance(weight, list):
-        return (5)
-    if (len(height) != len(weight)):
-        return (1)
-    for elem in height:
-        if not isinstance(elem, int) and not isinstance(elem, float):
-            return (2)
-    for elem in weight:
-        if not isinstance(elem, int) and not isinstance(elem, float):
-            return (2)
-    for i in range(len(height)):
-        if (height[i] < 0.5 or height[i] > 3):
-            return (3)
-        if (weight[i] < 20 or weight[i] > 200):
-            return (3)
+def list_to_array(height: list[int | float], w: list[int | float]):
+    '''Convert list to numpy array'''
+    height = np.array(height)
+    w = np.array(w)
+    if not isinstance(height, np.ndarray) or not isinstance(w, np.ndarray):
+        raise TypeError("Conversion from list to np.array failed")
+    return (height, w)
+
+
+def pars_array(height, weight):
+    '''Handling array error: typeError, size, dimension and content'''
+    if (not np.issubdtype(height.dtype, np.integer) and
+            not np.issubdtype(height.dtype, np.floating)):
+        raise TypeError("Array type must be int of float")
+    if (not np.issubdtype(weight.dtype, np.integer) and
+            not np.issubdtype(weight.dtype, np.floating)):
+        raise TypeError("Array type must be int of float")
+    if height.size != weight.size:
+        raise ArrayError("ArrayError: Array have different size")
+    if height.ndim != weight.ndim:
+        raise ArrayError("ArrayError: Array have different dimension")
+    for i in range(height.size):
         if (height[i] >= weight[i]):
-            return (4)
-    return (0)
+            return (0)
+    return (1)
 
 
 def to_f(number):
@@ -35,39 +45,29 @@ def to_f(number):
     return (number)
 
 
-def arround_float(h, w) -> tuple:
-    '''Round float in list to 2 decimal'''
-    h = [to_f(np.around(e, 2)) if isinstance(e, float) else e for e in h]
-    w = [to_f(np.around(e, 2)) if isinstance(e, float) else e for e in w]
-    return (h, w)
+def arround_float(height, weight) -> tuple:
+    '''Round float in array to 2 decimal'''
+    height = np.around(height, 2)
+    weight = np.around(weight, 2)
+    return (height, weight)
 
 
 def bmi_calcul(height, weight) -> list:
     '''Calcul the bmi'''
     res = []
-    for i in range(len(height)):
+    for i in range(height.size):
         count = weight[i] / (height[i])**2
-        res.append(count)
+        res.append(float(count))
     return (res)
 
 
 def give_bmi(h: list[int | float], w: list[int | float]) -> list[int | float]:
     '''Error handling. If an error detected, raise an exception. Otherwise,
 give the bmi by calculating it with bmi_calcul function and returns it'''
-    check = check_list(h, w)
-    match check:
-        case 1:
-            raise WrongArg("List len don't match. Please try again")
-        case 2:
-            raise WrongArg("Wrong type. Float and int only")
-        case 3:
-            raise WrongArg("A number or float in your list is out of range")
-        case 4:
-            raise WrongArg("Height can not be higher than weight")
-        case 5:
-            raise WrongArg("Wrong type. Height and weight must be 'list' type")
-        case _:
-            pass
+    h, w = list_to_array(h, w)
+    check = pars_array(h, w)
+    if not check:
+        raise ArrayError("Height can not be higher than weight")
     h, w = arround_float(h, w)
     return bmi_calcul(h, w)
 
