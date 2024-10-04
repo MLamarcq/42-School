@@ -1,5 +1,6 @@
 import numpy as np
 
+
 class ArrayError(Exception):
     '''Class ArrayError for error handling'''
     pass
@@ -19,6 +20,7 @@ def list_to_array(family: list[int | float]):
         raise ArrayError("Can not convert list to np.ndarray")
     return (family)
 
+
 def pars_array(family):
     if (family.ndim != 2):
         raise ArrayError("Wrong array dimension. We need 2D array")
@@ -32,12 +34,13 @@ def pars_array(family):
                 raise ArrayError("ArrayError : wrong type content")
     return
 
+
 def slice_arr(family, start, end):
     if (start < 0 and end <= 0):
-        raise ArrayError("ArrayError : slicing dimision are wrong, can't slice")
+        raise ArrayError("ArrayError: slicing dimision are wrong, can't slice")
     elif start < 0:
         family = family[:end]
-    elif end <= 0 :
+    elif end <= 0:
         end = start + 1
         family = family[start:end]
     elif start == end or (start > end):
@@ -46,28 +49,6 @@ def slice_arr(family, start, end):
     else:
         family = family[start:end]
     return family
-
-
-
-# def slice_arr(family, start, end):
-#     '''Apply the slice method on the array with the start and end given'''
-#     row_slice = 0
-#     tokken = False
-#     if start < 0:
-#         row_slice = slice(0, end)
-#     elif end < 0:
-#         row_slice = start
-#     elif (start < 0 and end < 0) or (start > end):
-#         return []
-#     elif start == end:
-#         row_slice = start
-#     else:
-#         row_slice = slice(start, end)
-#         tokken = True
-#     new_arr = family[row_slice]
-#     if tokken:
-#         row_slice = end - start
-#     return (new_arr, row_slice)
 
 
 def take_first_dimensions(family: list) -> tuple:
@@ -88,12 +69,16 @@ def print_output(shape: tuple, family) -> str:
     return output
 
 
-def array_to_list(family, res):
-    for row in range(family.shape[0]):
-        res.append([float(elem) if np.issubdtype(family[row].dtype, np.floating) else int(elem) for elem in family[row]])
+def array_to_list(f, res):
+    for row in range(f.shape[0]):
+        res.append([
+            float(elem) if np.issubdtype(f[row].dtype, np.floating)
+            else int(elem) for elem in f[row]
+        ])
     return res
 
-def slice_me(family: list[int | float], start: int=0, end: int=0) -> list:
+
+def slice_me(family: list[int | float], start: int, end: int) -> list:
     '''Error handling, slice the array and print the shape'''
     if (not isinstance(family, list)
             or not isinstance(start, int)

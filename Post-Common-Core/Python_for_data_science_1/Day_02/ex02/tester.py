@@ -1,7 +1,8 @@
-from load_image import ImgError, ft_load
+from load_image import ft_load
+
 
 def main():
-    print(ft_load('animal.jpeg'))
+    print(ft_load('landscape.jpg'))
 
 
 if __name__ == '__main__':
