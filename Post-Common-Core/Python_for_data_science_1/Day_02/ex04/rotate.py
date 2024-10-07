@@ -93,7 +93,8 @@ def main(file):
         print(output[:1])
         zoom_arr = zoom(output)
         rotate_arr = transpose_arr_left(zoom_arr)
-        print(f"rotate_arr = {rotate_arr}")
+        print(f"My new shape after transpose: {rotate_arr.shape}")
+        print(f"{rotate_arr}")
         plt.imshow(rotate_arr, cmap='gray')
         plt.show()
     except EOFError:
