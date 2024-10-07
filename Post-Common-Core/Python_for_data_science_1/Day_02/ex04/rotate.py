@@ -6,6 +6,9 @@ import numpy as np
 
 
 def reshape_array(array) :
+	'''Reshape the array dimension to crop the image on a specific region.
+    Change height and width for a 400x400 pixel image
+    '''
 	height, width, _ = array.shape
 	to_crop = 400
 	center_x = width / 2 + 145
@@ -69,10 +72,9 @@ def main(file) :
 			return
 		print(output[:1])
 		zoom_arr = zoom(output)
-		# rotate_arr = np.transpose(zoom_arr)
 		rotate_arr = transpose_arr_down(zoom_arr)
 		print(f"rotate_arr = {rotate_arr}")
-		imgplot = plt.imshow(rotate_arr, cmap='gray')
+		plt.imshow(rotate_arr, cmap='gray')
 		plt.show()
 	except EOFError :
 		print("EOF detected. End of program")
@@ -80,10 +82,10 @@ def main(file) :
 		print("Process interrupted. End of program")
 	except ImgError as e : 
 		print(str(e))
-	except FileNotFoundError :
-		print("File can't be found")
-	except OSError :
-		print("Wrong file")
+	except FileNotFoundError as e:
+		print(e)
+	except OSError as e:
+		print(e)
 
 if __name__ == '__main__' : 
 	main('animal.jpeg')

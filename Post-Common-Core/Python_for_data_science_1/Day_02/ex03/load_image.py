@@ -39,8 +39,8 @@ Error handling'''
             # img.show()
             return array
     except FileNotFoundError:
-        print("File can't be found")
+        raise FileNotFoundError("File can't be found")
     except OSError:
-        print("Wrong file")
+        raise OSError("Wrong file")
     except ImgError as e:
-        print(str(e))
+        raise ImgError(str(e))
