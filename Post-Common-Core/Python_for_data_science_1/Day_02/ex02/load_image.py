@@ -30,7 +30,7 @@ def Img_to_array(img):
 
 
 def ft_load(path: str) -> list:
-    '''Load an image from a file, converts it to numpy array and returns it. 
+    '''Load an image from a file, converts it to numpy array and returns it.
 Error handling'''
     try:
         with Image.open(path) as img:
