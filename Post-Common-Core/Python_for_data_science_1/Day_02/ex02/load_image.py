@@ -20,9 +20,8 @@ def check_img_format_and_mode(img):
     return img
 
 
-def get_RGB_return_array(img):
-    # temp = []
-    # temp = list(img.getdata())
+def Img_to_array(img):
+    '''Convert a Pillow image to numpy array and returns it'''
     data = np.array(img)
     if not isinstance(data, np.ndarray):
         raise ImgError("Error: Array failed setted up")
@@ -31,10 +30,12 @@ def get_RGB_return_array(img):
 
 
 def ft_load(path: str) -> list:
+    '''Load an image from a file, converts it to numpy array and returns it. 
+Error handling'''
     try:
         with Image.open(path) as img:
             img = check_img_format_and_mode(img)
-            array = get_RGB_return_array(img)
+            array = Img_to_array(img)
             # img.show()
             return array
     except FileNotFoundError:
