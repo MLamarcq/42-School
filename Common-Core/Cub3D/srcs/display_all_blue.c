@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   display_all_blue.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gael <gael@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mael <mael@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 15:37:27 by gael              #+#    #+#             */
-/*   Updated: 2023/08/03 15:46:57 by gael             ###   ########.fr       */
+/*   Updated: 2024/10/07 19:32:35 by mael             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,7 @@ void	display_all_blue(t_game *g, int i_rotate, int len_vision)
 		g->fov->lines_vision[i_rotate + g->fov->nbr_ray / 2] = \
 		draw_line_vision(g);
 		g->fov->lines_vision[i_rotate + g->fov->nbr_ray / 2] = \
-		abs_flt(cos(deg_to_radian(g->fov->deg * i_rotate))) * \
-		g->fov->lines_vision[i_rotate + g->fov->nbr_ray / 2];
+		abs_flt(cos(deg_to_radian(g->fov->deg * i_rotate))) * g->fov->lines_vision[i_rotate + g->fov->nbr_ray / 2];
 		if (g->fov->lines_vision[i_rotate + g->fov->nbr_ray / 2] == 0)
 			g->fov->lines_vision[i_rotate + g->fov->nbr_ray / 2] = 1;
 		g->fov->wall_witch[i_rotate + g->fov->nbr_ray / 2][0] = g->line->corr_x;

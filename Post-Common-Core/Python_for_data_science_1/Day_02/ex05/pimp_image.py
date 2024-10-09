@@ -108,10 +108,10 @@ def main():
         img = Image.fromarray((array * 255).astype(np.uint8))
         img.show()
         ft_invert(array)
-        ft_red(array)
-        ft_green(array)
-        ft_blue(array)
-        ft_grey(array)
+        # ft_red(array)
+        # ft_green(array)
+        # ft_blue(array)
+        # ft_grey(array)
     except EOFError:
         print("End of file detected: end of program")
     except ImgError as e:

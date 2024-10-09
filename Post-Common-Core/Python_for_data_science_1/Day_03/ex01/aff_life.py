@@ -10,7 +10,8 @@ class DataFrameError(Exception):
 
 
 def get_data_frame(file):
-    '''Load a DataFrame from a file. Raise an exception if the loading failed'''
+    '''Load a DataFrame from a file. Raise an exception\
+        if the loading failed'''
     df = load(file)
     if not isinstance(df, pd.DataFrame):
         raise DataFrameError
@@ -89,6 +90,13 @@ def build_plot(dataframe):
 
 
 def main():
+    '''Main function: 
+        - Load a DataFrame from a .csv file
+        - Extract specific data from the DataFrame, in that case, all the data
+        relative to France
+        - Build the plot from the data extracted
+        - Error handling
+    '''
     try:
         df = get_data_frame('life_expectancy_years.csv')
         spe_country = get_specific_country('France', df)
