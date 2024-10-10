@@ -90,7 +90,7 @@ def build_plot(dataframe):
 
 
 def main():
-    '''Main function: 
+    '''Main function:
         - Load a DataFrame from a .csv file
         - Extract specific data from the DataFrame, in that case, all the data
         relative to France
@@ -101,12 +101,18 @@ def main():
         df = get_data_frame('life_expectancy_years.csv')
         spe_country = get_specific_country('France', df)
         build_plot(spe_country)
+    except pd.errors.ParserError as e:
+        print(str(e))
     except DataFrameError as e:
         print(str(e))
     except EOFError:
         print("EOF detected, end of program")
     except KeyboardInterrupt:
         print("Program has been interrupted by signal CTRL + C")
+    except FileNotFoundError as e:
+        print(str(e))
+    except Exception as e:
+        print(str(e))
 
 
 if __name__ == '__main__':

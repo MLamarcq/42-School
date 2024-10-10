@@ -158,10 +158,18 @@ def main():
         build_plot(france, belgium)
     except ErrorDataFrame as e:
         print(str(e))
+    except EOFError:
+        print("EOF: end of program")
     except KeyError as e:
         print(f"Key error in DataFrame: {str(e)}")
     except KeyboardInterrupt:
         print("Signal SIGINT: end of program")
+    except FileNotFoundError as e:
+        print(str(e))
+    except pd.errors.ParserError as e:
+        print(str(e))
+    except Exception as e:
+        print(str(e))
 
 
 if __name__ == '__main__':

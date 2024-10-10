@@ -23,18 +23,15 @@ def series_to_dataframe(life_expectancy, income):
         "life_expectancy": life_expectancy,
         "income": income
     })
-    # data.fillna(0, inplace=True)
-    # data.replace([np.inf, -np.inf], 0, inplace=True)
     data.replace(0, np.nan, inplace=True)
     data.dropna(axis=0, how='any', inplace=True)
     data = data.astype(int)
-    print(data.head(), data.tail())
     return (data)
 
 
 def convert_string_to_float(element):
     if isinstance(element, str):
-        if 'M' in element: 
+        if 'M' in element:
             return float(element.replace('M', '').replace(',', '')) * 1e6
         elif 'B' in element:
             return float(element.replace('B', '').replace(',', '')) * 1e9
@@ -48,7 +45,7 @@ def convert_string_to_float(element):
 
 def get_specific_date(dataframe, date, code):
     match code:
-        case 'life': 
+        case 'life':
             specific_date = dataframe.loc[:, date]
             if not isinstance(specific_date, pd.Series):
                 raise DataFrameError
@@ -56,7 +53,6 @@ def get_specific_date(dataframe, date, code):
             specific_date = specific_date.astype(np.uint8)
         case 'income':
             specific_date = dataframe.loc[:, date]
-            # print(f"specific date in income = {specific_date.size}")
             if not isinstance(specific_date, pd.Series):
                 raise DataFrameError
             specific_date = specific_date.apply(convert_string_to_float)
@@ -93,8 +89,9 @@ def ajust_axes(axe, start, end, step=0):
 
 
 def axes_labels(x_label=None, y_label=None, title=None):
-    if not x_label or not y_label or not title: 
-        print("Error setting legend. Please check you gave all the information")
+    if not x_label or not y_label or not title:
+        print("Error setting legend. Please check\
+              you gave all the information")
         return
     plt.xlabel(x_label)
     plt.ylabel(y_label)
@@ -102,7 +99,7 @@ def axes_labels(x_label=None, y_label=None, title=None):
     return
 
 
-def change_value_for_axes(value, pos):
+def cvfa(value, pos):
     if value >= 1e3:
         return f"{value/1e3:.0f}k"
     return f"{value}"
@@ -113,17 +110,17 @@ def build_plot(data):
     ajust_axes('x', 300, int(1e4), 1000)
     ajust_axes('y', 20, 55, 5)
     plt.xscale('log')
-    plt.gca().get_xaxis().set_major_formatter(plt.FuncFormatter(change_value_for_axes))
+    plt.gca().get_xaxis().set_major_formatter(plt.FuncFormatter(cvfa))
     plt.scatter(x_axe, y_axe, c="blue", alpha=1, marker="o")
-    axes_labels("Gross domestic product", "Life Expectancy","1900")
+    axes_labels("Gross domestic product", "Life Expectancy", "1900")
     plt.show()
 
 
 def main():
-    try: 
+    try:
         dataframe_1 = get_daframe('life_expectancy_years.csv')
-        dataframe_2 = get_daframe('income_per_person_gdppercapita_ppp_inflation_adjusted.csv')
-        # print(dataframe_2.head())
+        dataframe_2 = get_daframe(
+            'income_per_person_gdppercapita_ppp_inflation_adjusted.csv')
         life_expectancy = get_specific_date(dataframe_1, '1900', 'life')
         income = get_specific_date(dataframe_2, '1900', 'income')
         data = series_to_dataframe(life_expectancy, income)
@@ -134,6 +131,14 @@ def main():
         print(f"Key error in DataFrame: {str(e)}")
     except KeyboardInterrupt:
         print("Signal SIGINT: end of program")
+    except EOFError:
+        print("EOF: end of program")
+    except FileNotFoundError as e:
+        print(str(e))
+    except pd.errors.ParserError as e:
+        print(str(e))
+    except Exception as e:
+        print(str(e))
 
 
 if __name__ == '__main__':

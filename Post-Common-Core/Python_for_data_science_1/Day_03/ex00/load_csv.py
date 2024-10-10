@@ -15,9 +15,9 @@ def load(file):
         print(f"Loading dataset of dimensions {data.shape}")
         return (data)
     except FileNotFoundError:
-        print("File not found")
+        raise FileNotFoundError("Error: file not found")
     except pd.errors.ParserError:
-        print("The file is not correct")
-    except Exception as e:
-        print(f"Une erreur s'est produite: {e}")
+        raise pd.errors.ParserError("Error: bad file")
+    except Exception:
+        raise Exception("Error: an error occurs. End of program")
     return None
