@@ -2,7 +2,7 @@ from ft_calculator import calculator
 
 
 def main():
-    '''
+    ''' 
     Main function.
     Test all the operation on calculator object and test error handling
     '''
