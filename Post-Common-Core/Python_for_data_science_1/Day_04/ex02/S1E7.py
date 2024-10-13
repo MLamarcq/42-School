@@ -71,7 +71,7 @@ class Lannister(Character):
 
     @classmethod
     def create_lannister_chain(cls, number):
-        if not number or number < 0:
+   f     if not number or number < 0:
             raise Exception("The number of new Lannister is wrong")
         tab = []
         for i in range(number):
