@@ -1,4 +1,9 @@
 def pars_args(args):
+    '''Pars the args received. Check if it is a list or a tuple. Then,
+    if args is empty and to finish, check the elements in the args are int
+    or float. If the function passes all the step, return, otherwise
+    raise a specific error
+    '''
     if not isinstance(args, (list, tuple)):
         raise TypeError("Args must be list or tuple")
     if len(args) == 0:
@@ -10,6 +15,10 @@ def pars_args(args):
 
 
 def pars_kwargs(kwargs):
+    '''Pars the kwargs received. Check if it is a dict. Then, check the
+    values in the kwargs are in the list to_check. If the function passes all
+    the step, return, otherwise raise a specific error
+    '''
     if not isinstance(kwargs, dict):
         raise TypeError("Kwargs must be a dict")
     to_check = ["mean", "median", "quartile", "std", "var"]
@@ -21,12 +30,14 @@ def pars_kwargs(kwargs):
 
 
 def parsing(args, kwargs):
+    ''''Args et kwargs parsing: call the pars_args and pars_kwqrgs function'''
     pars_args(args)
     pars_kwargs(kwargs)
     return
 
 
 def do_mean(args):
+    '''Do the mean of the element present in a gived list'''
     if not isinstance(args, (list, tuple)):
         raise TypeError("Args must be list or tuple")
     res = 0
@@ -37,6 +48,7 @@ def do_mean(args):
 
 
 def do_median(args):
+    '''Do the median of the element present in a gived list'''
     if not isinstance(args, (list, tuple)):
         raise TypeError("Args must be list or tuple")
     new_list = sorted(args)
@@ -49,6 +61,7 @@ def do_median(args):
 
 
 def return_quartile(args):
+    '''Do the quartile of the element present in a gived list'''
     if not isinstance(args, (list, tuple)):
         raise TypeError("Args must be list or tuple")
     new_list = sorted(args)
@@ -60,6 +73,7 @@ def return_quartile(args):
 
 
 def variance(args):
+    '''Do the variance of the element present in a gived list'''
     if not isinstance(args, (list, tuple)):
         raise TypeError("Args must be list or tuple")
     var = 0
@@ -75,6 +89,7 @@ def variance(args):
 
 
 def standard_deviation(args):
+    '''Do the standard deviation of the element present in a gived list'''
     if not isinstance(args, (list, tuple)):
         raise TypeError("Args must be list or tuple")
     var = variance(args)
@@ -83,6 +98,9 @@ def standard_deviation(args):
 
 
 def ft_statistics(*args: any, **kwargs: any) -> None:
+    '''ft_statistics do the operation wanted by the user gived as kwargs on\
+ the args given. It means: mean, median, quartile, variance, and\
+ standart deviation'''
     parsing(args, kwargs)
     for value in kwargs.values():
         match value:
