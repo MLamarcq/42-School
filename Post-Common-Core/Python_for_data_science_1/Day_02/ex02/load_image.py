@@ -36,7 +36,7 @@ Error handling'''
         with Image.open(path) as img:
             img = check_img_format_and_mode(img)
             array = Img_to_array(img)
-            # img.show()
+            img.show()
             return array
     except FileNotFoundError:
         print("File can't be found")

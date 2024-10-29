@@ -92,7 +92,7 @@ def main(file):
             return
         print(output[:1])
         zoom_arr = zoom(output)
-        rotate_arr = transpose_arr_down(zoom_arr)
+        rotate_arr = transpose_arr_right(zoom_arr)
         print(f"My new shape after transpose: {rotate_arr.shape}")
         print(f"{rotate_arr}")
         plt.imshow(rotate_arr, cmap='gray')
