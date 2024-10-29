@@ -30,5 +30,10 @@ def standardisation(array):
 	return (array - array.mean(axis=0)) / array.std(axis=0)
 
 
+def invert_standardisation(theta0, theta1, m, n):
+	theta1 = theta1 * (np.std(n, axis=0) / np.std(m, axis=0))
+	theta0 = (theta0 * np.std(n, axis=0)) + np.mean(n, axis=0) - theta1 * np.mean(m, axis=0)
+	return theta0, theta1
+
 def training_model(theta0, theta1, feature):
 	return theta0 + (theta1 * feature)

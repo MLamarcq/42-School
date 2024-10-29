@@ -39,11 +39,10 @@ def define_mileage():
 def main():
 	try:
 		theta0, theta1 = exctract_data_from_json('../value.json')
-		print(f"theta 0 = {theta0}, theta1 = {theta1}")
 		mileage = define_mileage()
-		print(mileage)
 		price = apply_model(theta0, theta1, mileage)
-		print(f"According to our estimation, your car will cost you: {price}")
+		print(f"According to our estimation, for a mileage of {mileage} km,", end='')
+		print(f" the price for your car is: {price:.2f} euros")
 	except FileNotFoundError as e:
 		print(f"{type(e).__name__}: {e}")
 	except KeyboardInterrupt as e:

@@ -35,6 +35,7 @@ def interactiv_plot(prediction, line):
 	line.set_ydata(prediction)
 	plt.pause(0.01)
 
+
 def end_intereactiv_plot():
 	plt.ioff()
 	plt.show()
